@@ -22,7 +22,18 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(process.env.BACKEND_URL + 'register', formData);
+      const baseUrl = process.env.BACKEND_URL
+      console.log("baseUrl", baseUrl)
+      const endPoint = "register"
+      const finalUrl = `${baseUrl}${endPoint}`
+      console.log("finalUrl", finalUrl)
+
+      // const response = await axios.post(process.env.BACKEND_URL + 'register', formData);
+      const response = await axios.post(finalUrl, formData);
+      console.log("response", response)
+
+
+
       history.push('/login');
     } catch (error) {
       alert(error.response?.data?.error || 'An error occurred');
