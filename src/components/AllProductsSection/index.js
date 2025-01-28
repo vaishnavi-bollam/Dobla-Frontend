@@ -5,6 +5,8 @@ import Cookies from 'js-cookie'
 import FiltersGroup from '../FiltersGroup'
 import ProductCard from '../ProductCard'
 import ProductsHeader from '../ProductsHeader'
+import { enviornments } from "../../config/environment"
+
 
 import './index.css'
 
@@ -101,7 +103,7 @@ class AllProductsSection extends Component {
       activeRatingId,
     } = this.state
     // const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
-    const apiUrl = process.env.BACKEND_URL + `products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
+    const apiUrl = enviornments.REACT_APP_BACKEND_URL + `products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
 
 
     const options = {

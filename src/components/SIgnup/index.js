@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import "./index.css"
+
+import axios from 'axios';
 
 import GoogleButton from 'react-google-button'
 
+import { enviornments } from "../../config/environment"
+import "./index.css"
 
 
 
@@ -22,13 +24,13 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const baseUrl = process.env.BACKEND_URL
+      const baseUrl = enviornments.REACT_APP_BACKEND_URL
       console.log("baseUrl", baseUrl)
       const endPoint = "register"
       const finalUrl = `${baseUrl}${endPoint}`
       console.log("finalUrl", finalUrl)
-
-      // const response = await axios.post(process.env.BACKEND_URL + 'register', formData);
+      console.log("formData", formData)
+      // const response = await axios.post(process.env.REACT_APP_BACKEND_URL + 'register', formData);
       const response = await axios.post(finalUrl, formData);
       console.log("response", response)
 
@@ -81,10 +83,10 @@ const Signup = () => {
           <button type="submit" className="create-account" disabled={loading}>
             {loading ? 'Signing Up...' : 'Create Account'}
           </button>
-          {/*   <button
+          {/* <button
             type="button"
             className="google-login"
-            onClick={() => (window.location.href = 'process.env.BACKEND_URLauth/google')}
+            onClick={() => (window.location.href = `${enviornments.REACT_APP_BACKEND_URL}auth/google`)}
           >
             <img
               src="https://image.similarpng.com/very-thumbnail/2021/09/Logo-Search-Google--on-transparent-background-PNG.png"
@@ -94,8 +96,14 @@ const Signup = () => {
             Continue With Google
           </button> */}
 
+
+
+          {/* <GoogleButton
+            onClick={() => (window.location.href =enviornments.REACT_APP_BACKEND_URL + 'auth/google')}
+          /> */}
+
           <GoogleButton
-            onClick={() => (window.location.href = process.env.BACKEND_URL + 'auth/google')}
+            onClick={() => (window.location.href = `${enviornments.REACT_APP_BACKEND_URL}auth/google`)}
           />
         </form>
         <p>

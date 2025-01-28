@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import "../SIgnup/index"
 import logo from '../logo/logo.png';
 
+import { enviornments } from "../../config/environment"
+
+
 import GoogleButton from 'react-google-button'
 
 
@@ -54,7 +57,7 @@ class LoginForm extends Component {
     const { username, password } = this.state
     console.log(username)
     const userDetails = { username, password }
-    const url = process.env.BACKEND_URL + 'login'
+    const url = enviornments.REACT_APP_BACKEND_URL + 'login'
     const options = {
       method: 'POST',
       headers: {
@@ -162,7 +165,7 @@ class LoginForm extends Component {
           </button> */}
 
           <GoogleButton
-            onClick={() => (window.location.href = process.env.BACKEND_URL + 'auth/google')}
+            onClick={() => (window.location.href = enviornments.REACT_APP_BACKEND_URL + 'auth/google')}
           />
 
 

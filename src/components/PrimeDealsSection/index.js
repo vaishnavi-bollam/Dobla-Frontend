@@ -3,6 +3,8 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
 import ProductCard from '../ProductCard'
+import { enviornments } from "../../config/environment"
+
 
 import './index.css'
 
@@ -31,7 +33,7 @@ class PrimeDealsSection extends Component {
     const jwtToken = Cookies.get('jwt_token')
 
     // const apiUrl = 'https://apis.ccbp.in/prime-deals'
-    const apiUrl = process.env.BACKEND_URL + 'primeProducts/'
+    const apiUrl = enviornments.REACT_APP_BACKEND_URL + 'primeProducts/'
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,

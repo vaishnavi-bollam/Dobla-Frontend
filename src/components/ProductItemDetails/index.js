@@ -9,6 +9,8 @@ import CartContext from '../../context/CartContext'
 import Header from '../Header'
 import SimilarProductItem from '../SimilarProductItem'
 
+import { enviornments } from "../../config/environment"
+
 import './index.css'
 
 const apiStatusConstants = {
@@ -53,7 +55,7 @@ class ProductItemDetails extends Component {
     })
     const jwtToken = Cookies.get('jwt_token')
     // const apiUrl = `https://apis.ccbp.in/products/${id}`
-    const apiUrl = process.env.BACKEND_URL + `products/${id}`
+    const apiUrl = enviornments.REACT_APP_BACKEND_URL + `products/${id}`
     console.log(id)
 
     const options = {
