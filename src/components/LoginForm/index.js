@@ -1,9 +1,9 @@
-import {Component} from 'react'
+import { Component } from 'react'
 import Cookies from 'js-cookie'
-import {Redirect} from 'react-router-dom'
-import {Link} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import "../SIgnup/index"
-import logo from '../logo/logo.png'; 
+import logo from '../logo/logo.png';
 
 import GoogleButton from 'react-google-button'
 
@@ -28,15 +28,15 @@ class LoginForm extends Component {
   }
 
   onChangeUsername = event => {
-    this.setState({username: event.target.value})
+    this.setState({ username: event.target.value })
   }
 
   onChangePassword = event => {
-    this.setState({password: event.target.value})
+    this.setState({ password: event.target.value })
   }
 
   onSubmitSuccess = jwtToken => {
-    const {history} = this.props
+    const { history } = this.props
 
     Cookies.set('jwt_token', jwtToken, {
       expires: 30,
@@ -46,15 +46,15 @@ class LoginForm extends Component {
   }
 
   onSubmitFailure = errorMsg => {
-    this.setState({showSubmitError: true, errorMsg})
+    this.setState({ showSubmitError: true, errorMsg })
   }
 
   submitForm = async event => {
     event.preventDefault()
-    const {username, password} = this.state
+    const { username, password } = this.state
     console.log(username)
-    const userDetails = {username, password}
-    const url = 'http://localhost:4000/login'
+    const userDetails = { username, password }
+    const url = process.env.BACKEND_URL + 'login'
     const options = {
       method: 'POST',
       headers: {
@@ -62,25 +62,25 @@ class LoginForm extends Component {
       },
       body: JSON.stringify(userDetails),
     }
-    
-    try{
-    const response = await fetch(url, options)
-    const data = await response.json()
-    console.log("Response Data:", data);
-    if (response.ok === true) {
-      this.onSubmitSuccess(data.jwt_token)
-    } else {
-      console.log("errormsg",data.error)
-      this.onSubmitFailure(data.error)
-    }
-    }catch (error) {
+
+    try {
+      const response = await fetch(url, options)
+      const data = await response.json()
+      console.log("Response Data:", data);
+      if (response.ok === true) {
+        this.onSubmitSuccess(data.jwt_token)
+      } else {
+        console.log("errormsg", data.error)
+        this.onSubmitFailure(data.error)
+      }
+    } catch (error) {
       this.onSubmitFailure('Something went wrong, please try again!');
     }
 
   }
 
   renderPasswordField = () => {
-    const {password} = this.state
+    const { password } = this.state
 
     return (
       <>
@@ -100,7 +100,7 @@ class LoginForm extends Component {
   }
 
   renderUsernameField = () => {
-    const {username} = this.state
+    const { username } = this.state
 
     return (
       <>
@@ -120,7 +120,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {showSubmitError, errorMsg} = this.state
+    const { showSubmitError, errorMsg } = this.state
     const jwtToken = Cookies.get('jwt_token')
 
     if (jwtToken !== undefined) {
@@ -148,10 +148,10 @@ class LoginForm extends Component {
           />
           <div className="input-container">{this.renderUsernameField()}</div>
           <div className="input-container">{this.renderPasswordField()}</div>
-       {/*    <button
+          {/*    <button
             type="button"
             className="google-login"
-            onClick={() => window.location.href = 'http://localhost:4000/auth/google'}
+            onClick={() => window.location.href = 'process.env.BACKEND_URLauth/google'}
           >
               <img
               src="https://image.similarpng.com/very-thumbnail/2021/09/Logo-Search-Google--on-transparent-background-PNG.png"
@@ -162,7 +162,7 @@ class LoginForm extends Component {
           </button> */}
 
           <GoogleButton
-          onClick={() => (window.location.href = 'http://localhost:4000/auth/google')}
+            onClick={() => (window.location.href = process.env.BACKEND_URL + 'auth/google')}
           />
 
 
@@ -170,12 +170,12 @@ class LoginForm extends Component {
             Login
           </button>
           {showSubmitError && <p className="error-message">*{errorMsg}</p>}
-         
-          <p> 
-          New User?{' '}
-          <a href="/signup" className="login-link">
-          Register here
-          </a>
+
+          <p>
+            New User?{' '}
+            <a href="/signup" className="login-link">
+              Register here
+            </a>
           </p>
         </form>
 

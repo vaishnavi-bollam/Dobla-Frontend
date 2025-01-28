@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import { Component } from 'react'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 
@@ -101,9 +101,9 @@ class AllProductsSection extends Component {
       activeRatingId,
     } = this.state
     // const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
-    const apiUrl = `http://localhost:4000/products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
+    const apiUrl = process.env.BACKEND_URL + `products?sort_by=${activeOptionId}&category=${activeCategoryId}&title_search=${searchInput}&rating=${activeRatingId}`
 
-         
+
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -155,11 +155,11 @@ class AllProductsSection extends Component {
   )
 
   changeSortby = activeOptionId => {
-    this.setState({activeOptionId}, this.getProducts)
+    this.setState({ activeOptionId }, this.getProducts)
   }
 
   renderProductsListView = () => {
-    const {productsList, activeOptionId} = this.state
+    const { productsList, activeOptionId } = this.state
     const shouldShowProductsList = productsList.length > 0
 
     return shouldShowProductsList ? (
@@ -191,7 +191,7 @@ class AllProductsSection extends Component {
   }
 
   renderAllProducts = () => {
-    const {apiStatus} = this.state
+    const { apiStatus } = this.state
 
     switch (apiStatus) {
       case apiStatusConstants.success:
@@ -217,11 +217,11 @@ class AllProductsSection extends Component {
   }
 
   changeRating = activeRatingId => {
-    this.setState({activeRatingId}, this.getProducts)
+    this.setState({ activeRatingId }, this.getProducts)
   }
 
   changeCategory = activeCategoryId => {
-    this.setState({activeCategoryId}, this.getProducts)
+    this.setState({ activeCategoryId }, this.getProducts)
   }
 
   enterSearchInput = () => {
@@ -229,11 +229,11 @@ class AllProductsSection extends Component {
   }
 
   changeSearchInput = searchInput => {
-    this.setState({searchInput})
+    this.setState({ searchInput })
   }
 
   render() {
-    const {activeCategoryId, searchInput, activeRatingId} = this.state
+    const { activeCategoryId, searchInput, activeRatingId } = this.state
 
     return (
       <div className="all-products-section">

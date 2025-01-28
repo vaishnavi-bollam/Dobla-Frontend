@@ -1,8 +1,8 @@
-import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-import {BsPlusSquare, BsDashSquare} from 'react-icons/bs'
+import { BsPlusSquare, BsDashSquare } from 'react-icons/bs'
 
 import CartContext from '../../context/CartContext'
 
@@ -44,16 +44,16 @@ class ProductItemDetails extends Component {
   })
 
   getProductData = async () => {
-    const {match} = this.props
-    const {params} = match
-    const {id} = params
+    const { match } = this.props
+    const { params } = match
+    const { id } = params
 
     this.setState({
       apiStatus: apiStatusConstants.inProgress,
     })
     const jwtToken = Cookies.get('jwt_token')
     // const apiUrl = `https://apis.ccbp.in/products/${id}`
-    const apiUrl = `http://localhost:4000/products/${id}`
+    const apiUrl = process.env.BACKEND_URL + `products/${id}`
     console.log(id)
 
     const options = {
@@ -106,20 +106,20 @@ class ProductItemDetails extends Component {
   )
 
   onDecrementQuantity = () => {
-    const {quantity} = this.state
+    const { quantity } = this.state
     if (quantity > 1) {
-      this.setState(prevState => ({quantity: prevState.quantity - 1}))
+      this.setState(prevState => ({ quantity: prevState.quantity - 1 }))
     }
   }
 
   onIncrementQuantity = () => {
-    this.setState(prevState => ({quantity: prevState.quantity + 1}))
+    this.setState(prevState => ({ quantity: prevState.quantity + 1 }))
   }
 
   renderProductDetailsView = () => (
     <CartContext.Consumer>
       {value => {
-        const {productData, quantity, similarProductsData} = this.state
+        const { productData, quantity, similarProductsData } = this.state
         const {
           availability,
           brand,
@@ -130,9 +130,9 @@ class ProductItemDetails extends Component {
           title,
           totalReviews,
         } = productData
-        const {addCartItem} = value
+        const { addCartItem } = value
         const onClickAddToCart = () => {
-          addCartItem({...productData, quantity})
+          addCartItem({ ...productData, quantity })
         }
 
         return (
@@ -207,7 +207,7 @@ class ProductItemDetails extends Component {
   )
 
   renderProductDetails = () => {
-    const {apiStatus} = this.state
+    const { apiStatus } = this.state
 
     switch (apiStatus) {
       case apiStatusConstants.success:

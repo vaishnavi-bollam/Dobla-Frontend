@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import { Component } from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
@@ -31,7 +31,7 @@ class PrimeDealsSection extends Component {
     const jwtToken = Cookies.get('jwt_token')
 
     // const apiUrl = 'https://apis.ccbp.in/prime-deals'
-    const apiUrl = 'http://localhost:4000/primeProducts/'
+    const apiUrl = process.env.BACKEND_URL + 'primeProducts/'
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -63,7 +63,7 @@ class PrimeDealsSection extends Component {
   }
 
   renderPrimeDealsListView = () => {
-    const {primeDeals} = this.state
+    const { primeDeals } = this.state
     console.log(primeDeals)
     return (
       <div>
@@ -92,7 +92,7 @@ class PrimeDealsSection extends Component {
   )
 
   render() {
-    const {apiStatus} = this.state
+    const { apiStatus } = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
         return this.renderPrimeDealsListView()

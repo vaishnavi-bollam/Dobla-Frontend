@@ -22,7 +22,7 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:4000/register', formData);
+      const response = await axios.post(process.env.BACKEND_URL + 'register', formData);
       history.push('/login');
     } catch (error) {
       alert(error.response?.data?.error || 'An error occurred');
@@ -70,10 +70,10 @@ const Signup = () => {
           <button type="submit" className="create-account" disabled={loading}>
             {loading ? 'Signing Up...' : 'Create Account'}
           </button>
-        {/*   <button
+          {/*   <button
             type="button"
             className="google-login"
-            onClick={() => (window.location.href = 'http://localhost:4000/auth/google')}
+            onClick={() => (window.location.href = 'process.env.BACKEND_URLauth/google')}
           >
             <img
               src="https://image.similarpng.com/very-thumbnail/2021/09/Logo-Search-Google--on-transparent-background-PNG.png"
@@ -84,7 +84,7 @@ const Signup = () => {
           </button> */}
 
           <GoogleButton
-          onClick={() => (window.location.href = 'http://localhost:4000/auth/google')}
+            onClick={() => (window.location.href = process.env.BACKEND_URL + 'auth/google')}
           />
         </form>
         <p>
