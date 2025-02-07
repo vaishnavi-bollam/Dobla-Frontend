@@ -54,7 +54,7 @@ const Signup = () => {
         />
       </div>
       <div className="form-section">
-        <h1>Join the Shopping App</h1>
+        <h1>Join With Us</h1>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
